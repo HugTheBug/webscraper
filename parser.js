@@ -1,4 +1,4 @@
-const logger = require('./logger');
+const { logger } = require('./log');
 const data = require('./data');
 
 const processText = async (posts) => posts.map((e) => {
@@ -7,9 +7,10 @@ const processText = async (posts) => posts.map((e) => {
 });
 
 const filterPosts = async (posts) => {
+  logger.info(`filtering ${posts.length} posts`);
   const names = await data.getNames();
   const result = posts.filter((post) => names.findIndex((e) => post.text.indexOf(e) !== -1) !== -1);
-  logger.log(`filtered ${result.length} posts`);
+  logger.info(`${result.length} posts left after filtering`);
   return result;
 };
 

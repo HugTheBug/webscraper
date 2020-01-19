@@ -1,13 +1,13 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-const logger = require('./logger');
+const { logger } = require('./log');
 
 const siteUrl = 'https://t.me/s/vandroukiby';
 const idPefixLength = 'vandroukiby/'.length;
 
 const fetchData = async (url) => {
-  logger.log(`fetching ${url} ...`);
+  logger.info(`fetching posts from ${url} ...`);
   const result = await axios.get(url);
   const html = result.data;
   const $ = cheerio.load(html);
@@ -24,31 +24,32 @@ const fetchData = async (url) => {
       text,
     });
   });
-  logger.log('finished');
   return posts;
 };
 
 const fetchFirst = async (number) => {
+  logger.info(`fetching first ${number} posts`);
   let posts = [];
   let data = await fetchData(siteUrl);
   let firstId = data[0].id;
   posts = posts.concat(data);
-  for (let i = 20; i < number; i += 20) {
+  for (let i = data.length; i < number; i += data.length) {
     // eslint-disable-next-line no-await-in-loop
     data = await fetchData(`${siteUrl}?before=${firstId}`);
     firstId = data[0].id;
     posts = data.concat(posts);
   }
-  logger.log(`fetched ${posts.length} posts`);
+  logger.info(`fetched ${posts.length} posts`);
   return posts;
 };
 
 const fetchUntilId = async (startId, maxNumber = 1000) => {
+  logger.info(`fetching posts after id ${startId}`);
   let posts = [];
   let data = await fetchData(siteUrl);
   let firstId = data[0].id;
   posts = posts.concat(data);
-  for (let i = 0; i < maxNumber; i += 20) {
+  for (let i = 0; i < maxNumber; i += data.length) {
     if (firstId <= startId) {
       break;
     }
@@ -60,7 +61,7 @@ const fetchUntilId = async (startId, maxNumber = 1000) => {
   if (firstId !== startId) {
     posts = posts.filter((e) => e.id > startId);
   }
-  logger.log(`fetched ${posts.length} posts`);
+  logger.info(`fetched ${posts.length} posts`);
   return posts;
 };
 

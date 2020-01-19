@@ -1,4 +1,4 @@
-const logger = require('./logger');
+const { logger } = require('./log');
 
 let lastId = 8226;
 const getLastId = async () => lastId;
@@ -8,7 +8,7 @@ const getLinks = async () => savedLinks;
 
 const updateLastId = async (posts) => {
   lastId = posts[posts.length - 1].id;
-  logger.log(`last post id is ${lastId}`);
+  logger.info(`last post id is ${lastId}`);
   return posts;
 };
 
