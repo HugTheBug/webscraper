@@ -7,11 +7,18 @@ const { logger } = require('./log');
 const data = require('./data');
 
 const app = express();
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 app.get('/links', async (req, res) => res.status(200).json(await data.getLinks()));
 
 app.get('/lastid', async (req, res) => res.status(200).json(await data.getLastId()));
+
+app.get('/', (req, res) => {
+  res
+    .status(200)
+    .send('Hello, world!')
+    .end();
+});
 
 app.listen(port, () => {
   logger.info(`app listening on port ${port}`);
@@ -32,3 +39,5 @@ app.listen(port, () => {
   job.start();
   logger.info('started cron job');
 });
+
+module.exports = app;

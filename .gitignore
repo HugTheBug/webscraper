@@ -108,3 +108,5 @@ dist
 
 # Goverment secrets
 # key.json
+
+app.yaml
