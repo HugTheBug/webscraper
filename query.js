@@ -19,9 +19,11 @@ const fetchData = async (url) => {
     const id = postBody.prop('data-post').slice(idPefixLength);
     const messagePart = postBody.find('.tgme_widget_message_text.js-message_text');
     const text = messagePart.contents().filter((_i, child) => child.tagName !== 'a' && child.tagName !== 'i').text();
+    const date = postBody.find('time').prop('datetime');
     posts.push({
       id,
       text,
+      date,
     });
   });
   return posts;

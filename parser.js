@@ -8,13 +8,19 @@ const processText = async (posts) => posts.map((e) => {
 
 const filterPosts = async (posts) => {
   logger.info(`filtering ${posts.length} posts`);
-  const names = await data.getNames();
-  const result = posts.filter((post) => names.findIndex((e) => post.text.indexOf(e) !== -1) !== -1);
+  const words = await data.getWords();
+  const result = posts.filter((post) => words.findIndex((e) => post.text.indexOf(e) !== -1) !== -1);
   logger.info(`${result.length} posts left after filtering`);
   return result;
 };
 
-const getLinks = async (posts) => posts.map((e) => `https://t.me/vandroukiby/${e.id}`);
+// eslint-disable-next-line arrow-body-style
+const getLinks = async (posts) => posts.map((e) => {
+  return {
+    link: `https://t.me/vandroukiby/${e.id}`,
+    date: e.date,
+  };
+});
 
 const filterLinks = async (posts) => processText(posts).then(filterPosts).then(getLinks);
 

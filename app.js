@@ -11,7 +11,7 @@ const port = 8080;
 
 app.get('/links', async (req, res) => res.status(200).json(await data.getLinks()));
 
-app.get('/id', async (req, res) => res.status(200).json(await data.getLastId()));
+app.get('/lastid', async (req, res) => res.status(200).json(await data.getLastId()));
 
 app.listen(port, () => {
   logger.info(`app listening on port ${port}`);
