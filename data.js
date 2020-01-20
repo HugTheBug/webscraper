@@ -65,7 +65,7 @@ const getWords = async () => {
     return [];
   }
   if (doc.exists) {
-    return doc.words;
+    return doc.words.map((e) => RegExp(e, 'm'));
   }
   logger.error('Failed to get words to search for: the words are not in the database.');
   return [];

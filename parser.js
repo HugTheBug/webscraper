@@ -9,7 +9,7 @@ const processText = async (posts) => posts.map((e) => {
 const filterPosts = async (posts) => {
   logger.info(`filtering ${posts.length} posts`);
   const words = await data.getWords();
-  const result = posts.filter((post) => words.findIndex((e) => post.text.indexOf(e) !== -1) !== -1);
+  const result = posts.filter((post) => words.some((e) => e.test(post.text)));
   logger.info(`${result.length} posts left after filtering`);
   return result;
 };
