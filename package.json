@@ -4,11 +4,15 @@
   "description": ":joy:",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint"
   },
   "author": "hugthebug",
   "license": "ISC",
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "dependencies": {
     "@google-cloud/firestore": "^3.4.0",
     "@google-cloud/logging-winston": "^3.0.5",
