@@ -2,10 +2,7 @@ const Firestore = require('@google-cloud/firestore');
 const { logger } = require('./log');
 const config = require('./config');
 
-const db = new Firestore({
-  projectId: config.projectId,
-  keyFilename: config.keyFilename,
-});
+const db = new Firestore({});
 
 const collectionScraping = 'scraping';
 const collectionLinks = 'links';
