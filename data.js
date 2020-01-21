@@ -29,14 +29,17 @@ const getLastId = async () => {
 };
 
 const getLinks = async () => {
-  let documents = [];
+  let snapshot = [];
   try {
-    documents = await db.collection(collectionLinks).get();
+    snapshot = await db.collection(collectionLinks).get();
   } catch (error) {
     logger.error(`Failed to get links: database error "${error}".`);
     return [];
   }
-  return documents.map((doc) => doc.data().link);
+  if (snapshot.empty) {
+    return [];
+  }
+  return snapshot.docs.map((doc) => doc.data().link);
 };
 
 const updateLastId = async (posts) => {

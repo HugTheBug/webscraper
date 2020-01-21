@@ -3,8 +3,10 @@ const { LoggingWinston } = require('@google-cloud/logging-winston');
 const config = require('./config');
 
 let transport = {};
+let level = 'info';
 if (process.env.ENV === 'development') {
   transport = new transports.Console();
+  level = 'debug';
 } else {
   transport = new LoggingWinston({
     projectId: config.projectId,
@@ -13,7 +15,7 @@ if (process.env.ENV === 'development') {
 }
 
 const logger = createLogger({
-  level: 'info',
+  level,
   format: format.combine(
     format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss',
