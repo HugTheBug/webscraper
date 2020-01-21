@@ -1,4 +1,7 @@
 dispatch:
   # Bot related requests to the bot service
-  - url: "/bot/*"
+  - url: "*/bot/*"
     service: telegrambot
+
+  - url: "*/scraper/*"
+    service: webscraper

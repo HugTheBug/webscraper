@@ -1,4 +1,4 @@
 cron:
 - description: "process new posts"
-  url: /update
+  url: /scraper/update
   schedule: every 4 hours

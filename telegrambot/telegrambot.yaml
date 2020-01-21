@@ -1,7 +1,5 @@
-# [START gae_quickstart_yaml]
 runtime: python37
 env: standard
 service: telegrambot
 env_variables:
   GOOGLE_APPLICATION_CREDENTIALS:  "../key.json"
-# [END gae_quickstart_yaml]

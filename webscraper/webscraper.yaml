@@ -1,7 +1,5 @@
-# [START gae_quickstart_yaml]
 runtime: nodejs10
 env: standard
-service: default
+service: webscraper
 env_variables:
   GOOGLE_APPLICATION_CREDENTIALS:  "../key.json"
-# [END gae_quickstart_yaml]
