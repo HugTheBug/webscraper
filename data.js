@@ -22,7 +22,7 @@ const getLastId = async () => {
     return defaultLastId;
   }
   if (doc.exists) {
-    return doc.lastId;
+    return doc.data().lastId;
   }
   logger.error(`Failed to get the last post id: scraping settings for telegram is not in the database. Using default id ${defaultLastId}.`);
   return defaultLastId;
@@ -36,7 +36,7 @@ const getLinks = async () => {
     logger.error(`Failed to get links: database error "${error}".`);
     return [];
   }
-  return documents.map((doc) => doc.link);
+  return documents.map((doc) => doc.data().link);
 };
 
 const updateLastId = async (posts) => {
@@ -65,7 +65,7 @@ const getWords = async () => {
     return [];
   }
   if (doc.exists) {
-    return doc.words.map((e) => RegExp(e, 'm'));
+    return doc.data().words.map((e) => RegExp(e, 'm'));
   }
   logger.error('Failed to get words to search for: the words are not in the database.');
   return [];

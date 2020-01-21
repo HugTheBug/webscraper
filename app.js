@@ -16,8 +16,7 @@ app.get('/lastid', async (req, res) => res.status(200).json(await data.getLastId
 app.get('/', (req, res) => {
   res
     .status(200)
-    .send('Hello, world!')
-    .end();
+    .send('Hello, world!');
 });
 
 app.listen(port, () => {
