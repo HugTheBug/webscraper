@@ -25,10 +25,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/update', (req, res) => {
-  updatePosts();
-  res
-    .status(200)
-    .send('updating...');
+  if (req.get('X-Appengine-Cron')) {
+    updatePosts();
+    res.status(200).send('updating...');
+  } else {
+    res.status(404);
+  }
 });
 
 app.listen(port, () => {
