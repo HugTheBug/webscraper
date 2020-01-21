@@ -18,3 +18,9 @@ node_modules/
 
 # linter
 .eslintrc.json
+
+# logs
+*.log
+
+# env file
+.env
