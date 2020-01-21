@@ -28,20 +28,6 @@ const getLastId = async () => {
   return defaultLastId;
 };
 
-const getLinks = async () => {
-  let snapshot = [];
-  try {
-    snapshot = await db.collection(collectionLinks).get();
-  } catch (error) {
-    logger.error(`Failed to get links: database error "${error}".`);
-    return [];
-  }
-  if (snapshot.empty) {
-    return [];
-  }
-  return snapshot.docs.map((doc) => doc.data().link);
-};
-
 const updateLastId = async (posts) => {
   const lastId = posts[posts.length - 1].id;
   db.collection(collectionScraping).doc(documentTelegram).set({
@@ -75,7 +61,6 @@ const getWords = async () => {
 };
 
 exports.getLastId = getLastId;
-exports.getLinks = getLinks;
 exports.getWords = getWords;
 exports.updateLastId = updateLastId;
 exports.addLinks = addLinks;

@@ -1,0 +1,4 @@
+cron:
+- description: "process new posts"
+  url: /update
+  schedule: every 4 hours

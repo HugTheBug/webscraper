@@ -1,4 +1,3 @@
-const cron = require('cron');
 const express = require('express');
 
 const query = require('./query');
@@ -19,32 +18,21 @@ const updatePosts = async () => {
     .then(async (links) => logger.info(links));
 };
 
-app.get('/links', async (req, res) => res.status(200).json(await data.getLinks()));
-
-app.get('/lastid', async (req, res) => res.status(200).json(await data.getLastId()));
-
 app.get('/', (req, res) => {
   res
     .status(200)
-    .send('Hello, world!');
+    .send('and here is nothing');
 });
 
-app.get('/forceupdate', (req, res) => {
+app.get('/update', (req, res) => {
   updatePosts();
   res
     .status(200)
-    .send('forced update');
+    .send('updating...');
 });
 
 app.listen(port, () => {
   logger.info(`app listening on port ${port}`);
-
-  const job = new cron.CronJob('00 00 08,20 * * *', () => {
-    updatePosts();
-  });
-
-  job.start();
-  logger.info('started cron job');
 });
 
 module.exports = app;
