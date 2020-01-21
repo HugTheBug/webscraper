@@ -1,4 +1,4 @@
 module.exports = {
   projectId: 'vandroukiby',
-  keyFilename: './key.json',
+  keyFilename: '../key.json',
 };

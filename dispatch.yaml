@@ -1,0 +1,4 @@
+dispatch:
+  # Bot related requests to the bot service
+  - url: "/bot/*"
+    service: telegrambot
