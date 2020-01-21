@@ -29,7 +29,7 @@ app.get('/update', (req, res) => {
     updatePosts();
     res.status(200).send('updating...');
   } else {
-    res.status(404);
+    res.status(404).end();
   }
 });
 
