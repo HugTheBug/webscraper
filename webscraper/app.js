@@ -18,13 +18,13 @@ const updatePosts = async () => {
     .then(async (links) => logger.info(links));
 };
 
-app.get('/', (req, res) => {
+app.get('/scraper', (req, res) => {
   res
     .status(200)
     .send('and here is nothing');
 });
 
-app.get('/update', (req, res) => {
+app.get('/scraper/update', (req, res) => {
   if (req.get('X-Appengine-Cron')) {
     updatePosts();
     res.status(200).send('updating...');
