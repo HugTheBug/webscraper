@@ -1,6 +1,5 @@
 const { createLogger, format, transports } = require('winston');
 const { LoggingWinston } = require('@google-cloud/logging-winston');
-const config = require('./config');
 
 let transport = {};
 let level = 'info';
@@ -8,10 +7,7 @@ if (process.env.ENV === 'development') {
   transport = new transports.Console();
   level = 'debug';
 } else {
-  transport = new LoggingWinston({
-    projectId: config.projectId,
-    keyFilename: config.keyFilename,
-  });
+  transport = new LoggingWinston();
 }
 
 const logger = createLogger({

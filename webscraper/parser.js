@@ -8,10 +8,14 @@ const processText = async (posts) => posts.map((e) => {
 
 const filterPosts = async (posts) => {
   logger.info(`filtering ${posts.length} posts`);
-  const words = await data.getWords();
-  const result = posts.filter((post) => words.some((e) => e.test(post.text)));
-  logger.info(`${result.length} posts left after filtering`);
-  return result;
+  if (posts.length > 0) {
+    const words = await data.getWords();
+    const result = posts.filter((post) => words.some((e) => e.test(post.text)));
+    logger.info(`${result.length} posts left after filtering`);
+    return result;
+  } else {
+    return [];
+  }
 };
 
 // eslint-disable-next-line arrow-body-style

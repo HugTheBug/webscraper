@@ -108,3 +108,6 @@ dist
 
 # Goverment secrets
 key.json
+
+# VS Code configurations
+.vscode

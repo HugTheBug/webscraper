@@ -1,8 +1,7 @@
 const Firestore = require('@google-cloud/firestore');
 const { logger } = require('./log');
-const config = require('./config');
 
-const db = new Firestore({});
+const db = new Firestore();
 
 const collectionScraping = 'scraping';
 const collectionLinks = 'links';
@@ -26,11 +25,13 @@ const getLastId = async () => {
 };
 
 const updateLastId = async (posts) => {
-  const lastId = posts[posts.length - 1].id;
-  db.collection(collectionScraping).doc(documentTelegram).set({
-    lastId,
-  }, { merge: true });
-  logger.info(`last post id is ${lastId}`);
+  if (posts.length > 0) {
+    const lastId = posts[posts.length - 1].id;
+    db.collection(collectionScraping).doc(documentTelegram).set({
+      lastId,
+    }, { merge: true });
+    logger.info(`last post id is ${lastId}`);
+  }
   return posts;
 };
 
