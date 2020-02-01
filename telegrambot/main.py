@@ -1,14 +1,33 @@
 from flask import Flask
+import telegram
+from dotenv import load_dotenv
+import os
+import json
+from threading import Thread
+
+load_dotenv()
 
 app = Flask(__name__)
+token = os.getenv('TELEGRAM_TOKEN')
+bot = telegram.Bot(token=token)
 
-@app.route('/')
-def hello():
-    return 'Hello World!'
+def process_webhook(content):
+    print('content {}'.foramt(content))
+    print('message {}'.format(content['message']))
+    message = content.message
+    print('from {}'.format(message['from']))
+    print('chat {}'.format(message['chat']))
 
 @app.route('/bot/')
 def bot_hello():
-    return 'bot lives here'
+    return 'bot here'
+
+@app.route('/bot/' + token)
+def webhook_arrived():
+    thread = Thread(target=process_webhook, args=(request.json,))
+    thread.start()
+    
+    return 'hi, webhook'
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
