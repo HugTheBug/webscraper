@@ -111,3 +111,6 @@ key.json
 
 # VS Code configurations
 .vscode
+
+# Python pycache:
+__pycache__/

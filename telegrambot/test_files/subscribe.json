@@ -1,0 +1,30 @@
+{
+    "message": {
+        "chat": {
+            "id": 123456789,
+            "type": "private",
+            "first_name": "FirstName",
+            "last_name": "LastName",
+            "username": "username"
+        },
+        "date": 1536183873,
+        "from": {
+            "id": 123456789,
+            "is_bot": false,
+            "language_code": "en-us",
+            "first_name": "FirstName",
+            "last_name": "LastName",
+            "username": "username"
+        },
+        "message_id": 123,
+        "text": "/sub",
+        "entities": [
+            {
+                "type": "bot_command",
+                "offset": 0,
+                "length": 4
+            }
+            ]
+    },
+    "update_id": 123456789
+}
