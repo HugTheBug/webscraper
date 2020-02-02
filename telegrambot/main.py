@@ -31,7 +31,9 @@ def webhook(request):
         chat_id = update.message.chat.id
         message = update.message
 
-        if not parse_message(message, chat_id):
+        if parse_message(message, chat_id):
+            print('successfully parsed the received message')
+        else:
             print('failed to parse the received message')
             bot.sendMessage(chat_id=chat_id, text='???')   
     return 'ok'
