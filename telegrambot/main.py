@@ -1,11 +1,11 @@
 import telegram
 import os
-from firebase_admin import firestore
+from google.cloud import firestore
 
 collectionScraping = u'scraping'
 documentTelegram = u'telegram'
 
-db = firestore.client()
+db = firestore.Client()
 token = os.environ['TELEGRAM_TOKEN']
 bot = telegram.Bot(token=token)
 
@@ -20,7 +20,7 @@ def webhook(request):
             if entity.type == 'bot_command':
                 command = message.text[entity.offset:entity.offset+entity.length]
                 if command == 'id':
-                    doc = db.collection(collectionScraping).doc(documentTelegram).get()
+                    doc = db.collection(collectionScraping).document(documentTelegram).get()
                     bot.sendMessage(chat_id=chat_id, text=doc.to_dict()[u'lastId'])
                 elif command == 'echo':
                     bot.sendMessage(chat_id=chat_id, text=text) 
